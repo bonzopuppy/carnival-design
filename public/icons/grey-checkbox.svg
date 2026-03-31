@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+    <path fill="#BCBCBC" stroke="#BEBEBE" stroke-width="2" d="M22,11 C22,17.0751429 17.0735714,22 11,22 C4.92485714,22 0,17.0751429 0,11 C0,4.92485714 4.92485714,0 11,0 C17.0735714,0 22,4.92485714 22,11 L22,11 Z"/>
+    <polyline stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" points="15.023 8.365 9.66 14.263 6.129 11.579"/>
+  </g>
+</svg>
