@@ -17,6 +17,11 @@ const prototypeScreens = [
     path: '/prototype/marketplace',
   },
   {
+    name: 'Product Selection (PSP)',
+    description: 'All variants of a product — colors, designs, iterations. Bridges marketplace to PDP.',
+    path: '/prototype/marketplace/select/personalized-mug',
+  },
+  {
     name: 'Product Detail (PDP)',
     description: 'Product image, description, price, and personalization entry point.',
     path: '/prototype/marketplace/product/leather-luggage-tag',
@@ -26,33 +31,13 @@ const prototypeScreens = [
     description: 'Shell editor with preview, text/photo inputs, and add-to-cart CTA.',
     path: '/prototype/editor/leather-luggage-tag',
   },
-  {
-    name: 'Cart',
-    description: 'Line items with edit affordance, personalization summary, and shipping estimate.',
-    path: '/prototype/cart',
-  },
-  {
-    name: 'Checkout',
-    description: 'Shipping form with pre-filled name, visible shipping cost, payment fields.',
-    path: '/prototype/checkout',
-  },
-  {
-    name: 'Order Confirmation',
-    description: 'Success state with order summary and links to order history and marketplace.',
-    path: '/prototype/confirmation',
-  },
-  {
-    name: 'Order History',
-    description: 'List of past orders with product details, reorder and view details CTAs.',
-    path: '/prototype/order-history',
-  },
 ]
 
 const useCaseFlows = [
   {
     id: 'UC7',
     name: 'Pre-Cruise',
-    description: 'Set Journey to Pre-Cruise. Splash → Homepage → Marketplace → PDP → Editor → Cart → Checkout → Confirmation.',
+    description: 'Set Journey to Pre-Cruise. Splash → Homepage → Marketplace → PSP → PDP → Editor.',
   },
   {
     id: 'UC8',
@@ -62,7 +47,7 @@ const useCaseFlows = [
   {
     id: 'UC9',
     name: 'Post-Cruise',
-    description: 'Set Journey to Post-Cruise. Splash → Homepage → Marketplace → PDP → Editor → Cart → Checkout → Confirmation.',
+    description: 'Set Journey to Post-Cruise. Splash → Homepage → Marketplace → PSP → PDP → Editor.',
   },
   {
     id: 'UC2',
@@ -72,7 +57,7 @@ const useCaseFlows = [
   {
     id: 'UC3',
     name: 'Calendar Entitlement',
-    description: 'Set Entitlement to Calendar. Homepage shows entitlement banner → calendar flow stub.',
+    description: 'Set Entitlement to Calendar. Homepage shows calendar modal → calendar flow stub.',
   },
 ]
 
@@ -101,8 +86,8 @@ export default function Landing() {
         <section className="mb-12">
           <h2 className="font-tempo text-[24px] tracking-wider text-text mb-2">TRAVEL MARKETPLACE PROTOTYPE</h2>
           <p className="text-sm text-text-secondary mb-6 max-w-2xl">
-            Clickable flow explorer for design review. Use the prototype controls at the top to toggle journey state,
-            entitlements, and entry point. All screens reactively update based on selections.
+            Clickable flow explorer for design review. Use the prototype controls at the top to toggle journey state
+            and entitlements. All screens reactively update based on selections.
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -112,7 +97,12 @@ export default function Landing() {
                 to={screen.path}
                 className="group block"
               >
-                <div className="text-primary-500 font-bold text-sm group-hover:underline mb-0.5">{screen.name}</div>
+                <div className="text-primary-500 font-bold text-sm group-hover:underline mb-0.5">
+                  {screen.name}
+                  {screen.path === '/prototype/home' && (
+                    <span className="ml-2 inline-flex items-center bg-secondary-500 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Start here</span>
+                  )}
+                </div>
                 <div className="text-xs text-text-muted leading-relaxed">{screen.description}</div>
               </Link>
             ))}
@@ -141,18 +131,13 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Style Guide Link */}
+        {/* Project Notes */}
         <section>
-          <h2 className="font-tempo text-[20px] tracking-wider text-text mb-2">DESIGN SYSTEM</h2>
-          <p className="text-sm text-text-secondary mb-4">
-            Component library, tokens, and style documentation for the Carnival Memories brand.
-          </p>
-          <Link
-            to="/style-guide/intro"
-            className="inline-flex items-center justify-center h-[44px] px-6 bg-primary-500 text-white font-bold rounded-[2px] hover:bg-primary-600 transition-colors text-sm"
-          >
-            Open Style Guide
-          </Link>
+          <h2 className="font-tempo text-[20px] tracking-wider text-text mb-2">PROJECT NOTES</h2>
+          <div className="bg-white border border-border rounded-[2px] p-4 text-sm text-text-secondary leading-relaxed">
+            <p className="mb-2"><span className="font-bold text-text">Cart, Checkout, Order Confirmation, and Order History</span> are not included in this prototype — those pages are not changing as part of the Travel Marketplace project. They may be added in a future iteration if needed for end-to-end flow testing.</p>
+            <p><span className="font-bold text-text">Product Selection Page (PSP)</span> only appears for products with multiple variations (colors, designs, shapes). If a product has only one variation, clicking it on the marketplace grid goes directly to the PDP.</p>
+          </div>
         </section>
       </div>
 

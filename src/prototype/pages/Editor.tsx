@@ -152,7 +152,7 @@ export default function Editor() {
                 <Button variant="secondary" size="sm" onClick={() => navigate('/prototype/marketplace')} className="flex-1">
                   Continue Shopping
                 </Button>
-                <Button variant="primary" size="sm" onClick={() => navigate('/prototype/cart')} className="flex-1">
+                <Button variant="primary" size="sm" disabled className="flex-1">
                   View Cart
                 </Button>
               </div>

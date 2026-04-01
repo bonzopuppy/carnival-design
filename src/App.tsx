@@ -32,6 +32,7 @@ import PrototypeLayout from './prototype/PrototypeLayout'
 import Splash from './prototype/pages/Splash'
 import Homepage from './prototype/pages/Homepage'
 import Marketplace from './prototype/pages/Marketplace'
+import ProductSelection from './prototype/pages/ProductSelection'
 import ProductDetail from './prototype/pages/ProductDetail'
 import Editor from './prototype/pages/Editor'
 import Cart from './prototype/pages/Cart'
@@ -94,6 +95,7 @@ export default function App() {
         <Route path="home" element={<Splash />} />
         <Route path="book/:id" element={<Homepage />} />
         <Route path="marketplace" element={<Marketplace />} />
+        <Route path="marketplace/select/:productId" element={<ProductSelection />} />
         <Route path="marketplace/product/:productId" element={<ProductDetail />} />
         <Route path="editor/:productId" element={<Editor />} />
         <Route path="cart" element={<Cart />} />

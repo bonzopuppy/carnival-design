@@ -1,5 +1,12 @@
 export type PersonalizationType = 'monogram' | 'graphic-text' | 'photo' | 'photo-text' | 'photo-layout' | 'photo-size'
 
+export interface ProductVariant {
+  id: string
+  label: string
+  color?: string
+  image?: string
+}
+
 export interface Product {
   id: string
   name: string
@@ -13,6 +20,7 @@ export interface Product {
   category: 'travel' | 'keepsake' | 'apparel' | 'photo'
   image?: string
   shopLabel?: string
+  variants?: ProductVariant[]
 }
 
 export const products: Product[] = [
@@ -44,6 +52,12 @@ export const products: Product[] = [
     category: 'keepsake',
     image: '/images/products/mug.png',
     shopLabel: 'Shop Mugs',
+    variants: [
+      { id: 'mug-white', label: 'Classic White', color: '#FFFFFF', image: '/images/products/mug.png' },
+      { id: 'mug-black', label: 'Matte Black', color: '#242627', image: '/images/products/mug.png' },
+      { id: 'mug-blue', label: 'Ocean Blue', color: '#0F559A', image: '/images/products/mug.png' },
+      { id: 'mug-red', label: 'Carnival Red', color: '#DC1225', image: '/images/products/mug.png' },
+    ],
   },
   {
     id: 'canvas-print',
@@ -72,6 +86,11 @@ export const products: Product[] = [
     category: 'keepsake',
     image: '/images/products/ornament.png',
     shopLabel: 'Shop Ornaments',
+    variants: [
+      { id: 'ornament-round', label: 'Round', image: '/images/products/ornament.png' },
+      { id: 'ornament-star', label: 'Star', image: '/images/products/ornament.png' },
+      { id: 'ornament-heart', label: 'Heart', image: '/images/products/ornament.png' },
+    ],
   },
   {
     id: 'tshirts',
@@ -86,6 +105,12 @@ export const products: Product[] = [
     category: 'apparel',
     image: '/images/products/tshirt.png',
     shopLabel: 'Shop T-Shirts',
+    variants: [
+      { id: 'tshirt-white', label: 'White', color: '#FFFFFF', image: '/images/products/tshirt.png' },
+      { id: 'tshirt-navy', label: 'Navy', color: '#051A2E', image: '/images/products/tshirt.png' },
+      { id: 'tshirt-heather', label: 'Heather Grey', color: '#A2A5A6', image: '/images/products/tshirt.png' },
+      { id: 'tshirt-red', label: 'Red', color: '#DC1225', image: '/images/products/tshirt.png' },
+    ],
   },
   // Travel products (row 2 in Figma post-cruise homepage, also shown pre-cruise)
   {

@@ -4,7 +4,7 @@ import type { Product } from '../data/products'
 export default function ProductTile({ product }: { product: Product }) {
   return (
     <Link
-      to={`/prototype/marketplace/product/${product.id}`}
+      to={`/prototype/marketplace/select/${product.id}`}
       className="bg-card flex flex-col group"
     >
       {/* Image */}

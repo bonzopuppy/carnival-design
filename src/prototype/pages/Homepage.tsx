@@ -86,7 +86,7 @@ function EntitlementBanner() {
 function HomepageProductCard({ product }: { product: Product }) {
   return (
     <Link
-      to={`/prototype/marketplace/product/${product.id}`}
+      to={`/prototype/marketplace/select/${product.id}`}
       className="flex flex-col gap-[16px] items-start w-full group"
     >
       {/* Image container: bg-primary-50, rounded-[4px], 222px tall */}
@@ -245,7 +245,7 @@ export default function Homepage() {
   useEffect(() => {
     if (hasCalendarEntitlement) setCalendarModalOpen(true)
     else setCalendarModalOpen(false)
-  }, [hasCalendarEntitlement])
+  }, [hasCalendarEntitlement, journeyState])
 
   // Section heading by journey state
   const sectionHeading: Record<string, string> = {
@@ -272,10 +272,6 @@ export default function Homepage() {
         {showPhotobookHero ? <PostCruiseHero /> : <GenericHero />}
       </div>
 
-      {/* Entitlement Banner */}
-      <div className="max-w-[1360px] mx-auto px-10 mt-8">
-        <EntitlementBanner />
-      </div>
 
       {/* Product Grid Section */}
       {products.length > 0 && (

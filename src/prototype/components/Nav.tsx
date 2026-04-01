@@ -54,7 +54,7 @@ function NavDrawerOverlay({ open, onClose }: { open: boolean; onClose: () => voi
               <span className="text-sm font-semibold text-primary-500">Carnival Celebration<sup>&reg;</sup></span>
               <span className="text-sm text-primary-500">
                 {journeyState === 'pre-cruise' && '(Apr 15 - Apr 22, 2026)'}
-                {journeyState === 'in-cruise' && '(Day 3 of 7)'}
+                {journeyState === 'in-cruise' && '(Oct 27 - Nov 3, 2024)'}
                 {journeyState === 'post-cruise' && '(Oct 27 - Nov 3, 2024)'}
               </span>
             </div>
@@ -150,31 +150,21 @@ export default function Nav() {
           <div className="flex items-center justify-end gap-2">
             {/* Desktop (xl+): bordered buttons */}
             <div className="hidden xl:flex items-center gap-2">
-              <BorderBtn to="/prototype/order-history" title="Account">
+              <span className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm opacity-50 cursor-default" title="Account (not in scope)">
                 <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
-              </BorderBtn>
-              <BorderBtn to="/prototype/cart" title="Cart" className="relative">
+              </span>
+              <span className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm opacity-50 cursor-default" title="Cart (not in scope)">
                 <img src="/icons/cart.svg" alt="Cart" className="w-6 h-6" />
-                {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-secondary-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                    {itemCount}
-                  </span>
-                )}
-              </BorderBtn>
+              </span>
             </div>
             {/* Mobile/tablet: no borders */}
             <div className="xl:hidden flex items-center gap-1">
-              <Link to="/prototype/order-history" className="p-2">
+              <span className="p-2 opacity-50 cursor-default">
                 <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
-              </Link>
-              <Link to="/prototype/cart" className="p-2 relative">
+              </span>
+              <span className="p-2 opacity-50 cursor-default">
                 <img src="/icons/cart.svg" alt="Cart" className="w-6 h-6" />
-                {itemCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-secondary-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
+              </span>
             </div>
           </div>
         </div>
@@ -192,7 +182,7 @@ export default function Nav() {
           </span>
           <span className="text-sm text-primary-500">
             {journeyState === 'pre-cruise' && '(Apr 15 - Apr 22, 2026)'}
-            {journeyState === 'in-cruise' && '(Day 3 of 7)'}
+            {journeyState === 'in-cruise' && '(Oct 27 - Nov 3, 2024)'}
             {journeyState === 'post-cruise' && '(Oct 27 - Nov 3, 2024)'}
           </span>
           <button className="font-tempo text-xs text-primary-500 uppercase tracking-wider underline underline-offset-2 ml-1">
