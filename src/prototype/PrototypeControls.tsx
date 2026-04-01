@@ -150,7 +150,6 @@ export default function PrototypeControls() {
         value={journeyState}
         onChange={setJourneyState}
         options={[
-          { value: 'none', label: 'None' },
           { value: 'pre-cruise', label: 'Pre-Cruise' },
           { value: 'in-cruise', label: 'In-Cruise' },
           { value: 'post-cruise', label: 'Post-Cruise' },

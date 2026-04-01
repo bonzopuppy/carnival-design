@@ -93,10 +93,13 @@ export default function Nav() {
           className="h-full px-6"
           style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}
         >
-          {/* Left — hamburger */}
+          {/* Left — hamburger with border */}
           <div className="flex items-center">
-            <button className="p-2" onClick={() => setDrawerOpen(true)}>
-              <img src="/icons/hamburger-menu.svg" alt="Menu" className="w-6 h-6" />
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm"
+            >
+              <img src="/icons/hamburger-menu.svg" alt="Menu" className="w-6 h-6" style={{ filter: iconFilter }} />
             </button>
           </div>
 

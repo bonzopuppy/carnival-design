@@ -24,7 +24,7 @@ const sizes: Record<Size, string> = {
 
 const variants: Record<Variant, string> = {
   primary: 'bg-primary-500 text-white border border-primary-500 hover:bg-primary-400 hover:border-primary-400 active:bg-primary-700 active:border-primary-700 focus:bg-primary-600',
-  cta: 'bg-secondary-500 text-white border border-secondary-500 hover:bg-secondary-500 active:bg-secondary-700 active:border-secondary-700 focus:bg-secondary-600',
+  cta: 'bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 focus:bg-secondary-600',
   secondary: 'bg-white text-primary-500 border border-primary-500 hover:text-primary-400 hover:border-primary-400 active:text-primary-700 active:border-primary-700',
   link: 'bg-transparent text-primary-500 border-b-[1.5px] border-primary-200 rounded-none min-w-0 px-0 hover:border-primary-500',
   danger: 'bg-white text-error border border-error hover:bg-secondary-200/20',

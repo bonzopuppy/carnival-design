@@ -29,7 +29,7 @@ interface PrototypeState {
 const PrototypeContext = createContext<PrototypeState | null>(null)
 
 export function PrototypeProvider({ children }: { children: ReactNode }) {
-  const [journeyState, setJourneyState] = useState<JourneyState>('none')
+  const [journeyState, setJourneyState] = useState<JourneyState>('pre-cruise')
   const [entitlement, setEntitlement] = useState<Entitlement>('none')
   const [entryPoint, setEntryPoint] = useState<EntryPoint>('direct')
   const [cart, setCart] = useState<CartItem[]>([])
