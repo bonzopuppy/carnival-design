@@ -84,7 +84,7 @@ export default function Landing() {
       <div className="max-w-5xl mx-auto px-6 py-10">
         {/* Prototype Section */}
         <section className="mb-12">
-          <h2 className="font-tempo text-[24px] tracking-wider text-text mb-2">TRAVEL MARKETPLACE PROTOTYPE</h2>
+          <h2 className="font-tempo text-[24px] tracking-wider text-text mb-2">CARNIVAL MARKETPLACE V2</h2>
           <p className="text-sm text-text-secondary mb-6 max-w-2xl">
             Clickable flow explorer for design review. Use the prototype controls at the top to toggle journey state
             and entitlements. All screens reactively update based on selections.

@@ -5,7 +5,7 @@ import Nav from './components/Nav'
 
 export default function PrototypeLayout() {
   const { pathname } = useLocation()
-  const hideNav = pathname === '/prototype/home' || pathname.startsWith('/prototype/entitlement')
+  const hideNav = pathname === '/prototype/home' || pathname.startsWith('/prototype/entitlement') || pathname.startsWith('/prototype/marketplace/product') || pathname.startsWith('/prototype/editor')
 
   return (
     <PrototypeProvider>
