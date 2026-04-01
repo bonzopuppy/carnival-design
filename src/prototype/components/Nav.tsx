@@ -146,24 +146,22 @@ export default function Nav() {
             </Link>
           </div>
 
-          {/* Right — cart + account */}
+          {/* Right — cart + account (visible but not linked — out of scope) */}
           <div className="flex items-center justify-end gap-2">
-            {/* Desktop (xl+): bordered buttons */}
             <div className="hidden xl:flex items-center gap-2">
-              <span className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm opacity-50 cursor-default" title="Account (not in scope)">
-                <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
-              </span>
-              <span className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm opacity-50 cursor-default" title="Cart (not in scope)">
+              <span className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm">
                 <img src="/icons/cart.svg" alt="Cart" className="w-6 h-6" />
+              </span>
+              <span className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm">
+                <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
               </span>
             </div>
-            {/* Mobile/tablet: no borders */}
             <div className="xl:hidden flex items-center gap-1">
-              <span className="p-2 opacity-50 cursor-default">
-                <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
-              </span>
-              <span className="p-2 opacity-50 cursor-default">
+              <span className="p-2">
                 <img src="/icons/cart.svg" alt="Cart" className="w-6 h-6" />
+              </span>
+              <span className="p-2">
+                <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
               </span>
             </div>
           </div>

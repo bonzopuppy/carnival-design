@@ -8,8 +8,8 @@ import CalendarModal from '../components/CalendarModal'
 /* ── Entitlement Banner ────────────────────────────────── */
 
 function EntitlementBanner() {
-  const { entitlement } = usePrototype()
-  if (entitlement === 'none') return null
+  const { entitlement, journeyState } = usePrototype()
+  if (entitlement === 'none' || journeyState === 'pre-cruise') return null
 
   const showBook = entitlement === 'compact-book' || entitlement === 'both'
   const showCalendar = entitlement === 'calendar' || entitlement === 'both'
@@ -123,43 +123,97 @@ function HomepageProductCard({ product }: { product: Product }) {
   )
 }
 
-/* ── Post-Cruise Hero ─────────────────────────────────── */
+/* ── Photobook Hero (post-cruise default + compact book entitlement) ── */
 
-function PostCruiseHero() {
+function PhotobookHero({ freeBook = false }: { freeBook?: boolean }) {
   return (
     <div className="bg-primary-500 rounded-l-[4px] overflow-hidden relative" style={{ height: 600 }}>
-      {/* Left: light blue panel with photobook */}
-      <div className="absolute left-0 top-0 h-full overflow-hidden rounded-l-[4px]" style={{ width: 680, backgroundColor: '#c2daf1' }}>
-        <img
-          src="/images/hero/photobook-open.png"
-          alt="Open photo book"
-          className="absolute"
-          style={{ left: 72, top: 144, width: 514, boxShadow: '5px 5px 10px 0px rgba(0,0,0,0.25)' }}
-        />
-        {/* Video card */}
-        <div className="absolute bg-white rounded-[4px] overflow-hidden flex" style={{ left: 16, top: 472, width: 258, height: 112 }}>
-          <div className="relative rounded-[2px] overflow-hidden shrink-0" style={{ width: 128, height: 96, margin: 8 }}>
-            <img src="/images/hero/video-thumbnail.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <path fillRule="evenodd" clipRule="evenodd" d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32ZM25 16L11 8V24L25 16Z" fill="rgba(243,246,250,0.9)"/>
-              </svg>
+      {/* Left: image panel */}
+      <div className="absolute left-0 top-0 h-full overflow-hidden rounded-l-[4px]" style={{ width: 680, backgroundColor: freeBook ? '#0f559a' : '#c2daf1' }}>
+        {/* Full-bleed hands image for free book */}
+        {freeBook && (
+          <img
+            src="/images/hero-photobook-hands.jpg"
+            alt="Hands holding open photobook"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+            style={{ width: 780, height: 600 }}
+          />
+        )}
+
+        {/* Free book badge — pennant/flag shape */}
+        {freeBook && (
+          <div className="absolute z-10" style={{ left: 0, top: 24 }}>
+            {/* Flag shape bg */}
+            <svg width="245" height="32" viewBox="0 0 245 32" fill="none" className="absolute inset-0">
+              <path d="M0 0H245L237 16L245 32H0V0Z" fill="#12B76A"/>
+            </svg>
+            {/* Content */}
+            <div className="relative flex items-center gap-2 h-[32px] pl-2 pr-4">
+              <img src="/images/sale-icon.svg" alt="" className="w-4 h-4" />
+              <span
+                className="text-primary-50 whitespace-nowrap"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 500, fontSize: 14, lineHeight: 1.3 }}
+              >
+                Your Carnival Memories, on us.
+              </span>
             </div>
           </div>
-          <p className="font-tempo text-primary-700 uppercase" style={{ fontSize: 18, lineHeight: 1.2, padding: 12 }}>
-            Watch your photobook create itself
-          </p>
-        </div>
+        )}
+
+        {/* Photobook + video card (non-freeBook only) */}
+        {!freeBook && (
+          <>
+            <img
+              src="/images/hero/photobook-open.png"
+              alt="Open photo book"
+              className="absolute"
+              style={{ left: 72, top: 144, width: 514, boxShadow: '5px 5px 10px 0px rgba(0,0,0,0.25)' }}
+            />
+            <div className="absolute bg-white rounded-[4px] overflow-hidden flex" style={{ left: 16, top: 472, width: 258, height: 112 }}>
+              <div className="relative rounded-[2px] overflow-hidden shrink-0" style={{ width: 128, height: 96, margin: 8 }}>
+                <img src="/images/hero/video-thumbnail.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32ZM25 16L11 8V24L25 16Z" fill="rgba(243,246,250,0.9)"/>
+                  </svg>
+                </div>
+              </div>
+              <p className="font-tempo text-primary-700 uppercase" style={{ fontSize: 18, lineHeight: 1.2, padding: 12 }}>
+                Watch your photobook create itself
+              </p>
+            </div>
+          </>
+        )}
+        {/* Video card (freeBook — still shown per Figma) */}
+        {freeBook && (
+          <div className="absolute bg-white rounded-[4px] overflow-hidden flex" style={{ left: 16, top: 472, width: 258, height: 112 }}>
+            <div className="relative rounded-[2px] overflow-hidden shrink-0" style={{ width: 128, height: 96, margin: 8 }}>
+              <img src="/images/hero/video-thumbnail.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32ZM25 16L11 8V24L25 16Z" fill="rgba(243,246,250,0.9)"/>
+                </svg>
+              </div>
+            </div>
+            <p className="font-tempo text-primary-700 uppercase" style={{ fontSize: 18, lineHeight: 1.2, padding: 12 }}>
+              Watch your photobook create itself
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Right: text content + CTA */}
       <div className="absolute flex flex-col gap-[8px] items-start" style={{ left: 736, top: 56, width: 548 }}>
-        <h1 className="font-tempo text-white uppercase" style={{ fontSize: 48, lineHeight: 1.2 }}>
-          Turn your cruise photos into a beautiful keepsake
-          <br />— Automatically
-        </h1>
+        <div className="font-tempo text-white uppercase" style={{ fontSize: 48, lineHeight: 1.2 }}>
+          <p style={{ lineHeight: 1.2, marginBottom: 0 }}>Turn your cruise photos into a beautiful keepsake</p>
+          <p style={{ lineHeight: 1.2 }}>- Automatically</p>
+        </div>
         <p className="text-primary-50 font-semibold" style={{ fontSize: 20, lineHeight: 1.3, maxWidth: 457 }}>
-          Start your photobook and capture your Carnival cruise memories
+          {freeBook ? (
+            <>Start your <strong>FREE</strong> book</>
+          ) : (
+            'Start your photobook and capture your Carnival cruise memories'
+          )}
         </p>
       </div>
 
@@ -169,7 +223,7 @@ function PostCruiseHero() {
           className="inline-flex items-center justify-center gap-[12px] bg-secondary-500 text-primary-50 font-tempo uppercase rounded-[2px] px-[20px] py-[12px] hover:bg-secondary-600 transition-colors whitespace-nowrap"
           style={{ fontSize: 16, lineHeight: 1.2, letterSpacing: '0.64px' }}
         >
-          Start your photobook
+          {freeBook ? 'Start your free book' : 'Start your photobook'}
           <svg width="13" height="13" viewBox="0 0 13.3333 13.3333" fill="none"><path d="M6.66667 0L5.49167 1.175L10.1417 5.83333H0V7.5H10.1417L5.49167 12.1583L6.66667 13.3333L13.3333 6.66667L6.66667 0Z" fill="#F3F6FA"/></svg>
         </Link>
       </div>
@@ -238,7 +292,8 @@ function GenericHero() {
 export default function Homepage() {
   const { journeyState, entitlement } = usePrototype()
   const products = getProductsByJourneyState(journeyState)
-  const showPhotobookHero = journeyState === 'post-cruise' || journeyState === 'in-cruise'
+  const hasCompactBook = entitlement === 'compact-book' || entitlement === 'both'
+  const showPhotobookHero = journeyState === 'post-cruise' || journeyState === 'in-cruise' || hasCompactBook
   const hasCalendarEntitlement = entitlement === 'calendar' || entitlement === 'both'
   const [calendarModalOpen, setCalendarModalOpen] = useState(false)
 
@@ -269,7 +324,7 @@ export default function Homepage() {
 
       {/* Hero Section — 1360px max, 40px side padding */}
       <div className="max-w-[1360px] mx-auto px-10">
-        {showPhotobookHero ? <PostCruiseHero /> : <GenericHero />}
+        {showPhotobookHero ? <PhotobookHero freeBook={hasCompactBook} /> : <GenericHero />}
       </div>
 
 

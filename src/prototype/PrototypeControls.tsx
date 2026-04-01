@@ -117,7 +117,14 @@ function FlowNav() {
 }
 
 export default function PrototypeControls() {
-  const { journeyState, entitlement, entryPoint, setJourneyState, setEntitlement, setEntryPoint } = usePrototype()
+  const { journeyState, entitlement, setJourneyState, setEntitlement } = usePrototype()
+
+  const handleJourneyChange = (state: JourneyState) => {
+    setJourneyState(state)
+    if (state === 'pre-cruise') {
+      setEntitlement('none')
+    }
+  }
 
   return (
     <div className="bg-primary-800 border-b border-white/10 px-4 py-2 flex items-center gap-4 z-50">
@@ -133,7 +140,7 @@ export default function PrototypeControls() {
       <Dropdown<JourneyState>
         label="Journey"
         value={journeyState}
-        onChange={setJourneyState}
+        onChange={handleJourneyChange}
         options={[
           { value: 'pre-cruise', label: 'Pre-Cruise' },
           { value: 'in-cruise', label: 'In-Cruise' },
@@ -141,17 +148,19 @@ export default function PrototypeControls() {
         ]}
       />
 
-      <Dropdown<Entitlement>
-        label="Entitlements"
-        value={entitlement}
-        onChange={setEntitlement}
-        options={[
-          { value: 'none', label: 'None' },
-          { value: 'compact-book', label: 'Compact Book' },
-          { value: 'calendar', label: 'Calendar' },
-          { value: 'both', label: 'Both' },
-        ]}
-      />
+      {journeyState !== 'pre-cruise' && (
+        <Dropdown<Entitlement>
+          label="Entitlements"
+          value={entitlement}
+          onChange={setEntitlement}
+          options={[
+            { value: 'none', label: 'None' },
+            { value: 'compact-book', label: 'Compact Book' },
+            { value: 'calendar', label: 'Calendar' },
+            { value: 'both', label: 'Both' },
+          ]}
+        />
+      )}
 
       <div className="ml-auto">
         <FlowNav />
