@@ -168,17 +168,6 @@ export default function PrototypeControls() {
         ]}
       />
 
-      <Dropdown<EntryPoint>
-        label="Entry"
-        value={entryPoint}
-        onChange={setEntryPoint}
-        options={[
-          { value: 'direct', label: 'Direct' },
-          { value: 'pre-cruise-email', label: 'Pre-Cruise Email' },
-          { value: 'post-cruise-email', label: 'Post-Cruise Email' },
-        ]}
-      />
-
       <div className="ml-auto">
         <FlowNav />
       </div>

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { usePrototype } from '../PrototypeContext'
 import { getProductsByJourneyState, type Product } from '../data/products'
 import Button from '../components/Button'
+import CalendarModal from '../components/CalendarModal'
 
 /* ── Entitlement Banner ────────────────────────────────── */
 
@@ -234,10 +236,16 @@ function GenericHero() {
 /* ── Homepage ──────────────────────────────────────────── */
 
 export default function Homepage() {
-  const { journeyState } = usePrototype()
+  const { journeyState, entitlement } = usePrototype()
   const products = getProductsByJourneyState(journeyState)
-  const isPostCruise = journeyState === 'post-cruise'
   const showPhotobookHero = journeyState === 'post-cruise' || journeyState === 'in-cruise'
+  const hasCalendarEntitlement = entitlement === 'calendar' || entitlement === 'both'
+  const [calendarModalOpen, setCalendarModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (hasCalendarEntitlement) setCalendarModalOpen(true)
+    else setCalendarModalOpen(false)
+  }, [hasCalendarEntitlement])
 
   // Section heading by journey state
   const sectionHeading: Record<string, string> = {
@@ -249,6 +257,9 @@ export default function Homepage() {
 
   return (
     <div className="bg-white">
+      {/* Calendar entitlement modal */}
+      <CalendarModal open={calendarModalOpen} onClose={() => setCalendarModalOpen(false)} />
+
       {/* Welcome title */}
       <div className="px-10 pt-12 pb-8 text-center">
         <h2 className="font-tempo text-secondary-500 uppercase" style={{ fontSize: 36, lineHeight: 1.2 }}>
@@ -284,7 +295,7 @@ export default function Homepage() {
               ))}
             </div>
 
-            {isPostCruise && products.length > 5 && (
+            {journeyState === 'post-cruise' && products.length > 5 && (
               <div className="flex gap-[24px] items-start w-full">
                 {products.slice(5, 10).map(product => (
                   <div key={product.id} className="w-[253px] shrink-0">
