@@ -92,7 +92,7 @@ export default function EntitlementSplash() {
 
             {/* Center: Book cover — elevated, blue bg */}
             <div
-              className="w-[156px] h-[156px] rounded-[16px] border-[6px] border-white overflow-hidden flex-shrink-0 relative"
+              className="w-[156px] h-[156px] rounded-[16px] border-[6px] border-white overflow-hidden flex-shrink-0 flex items-center justify-center"
               style={{
                 backgroundColor: '#c2daf1',
                 boxShadow: '0px 12px 24px rgba(0,0,0,0.24)',
@@ -102,7 +102,8 @@ export default function EntitlementSplash() {
               <img
                 src="/images/entitlement-book-cover.png"
                 alt={isBook ? 'Photo Book' : 'Calendar'}
-                className="absolute inset-0 w-full h-full object-contain p-2"
+                className="max-w-[85%] max-h-[85%] object-contain"
+                style={{ marginLeft: 14, marginTop: 14 }}
               />
             </div>
 
@@ -148,16 +149,13 @@ export default function EntitlementSplash() {
       </section>
 
       {/* ── Three Easy Steps Section ─────────────────────── */}
-      <section id="how-it-works" className="py-20 px-6" style={{ backgroundColor: '#E7EDF5' }}>
+      <section id="how-it-works" className="py-20 px-6" style={{ backgroundColor: '#C2DAF1' }}>
         {/* Label */}
         <div className="flex items-center justify-center gap-2 mb-4">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="11" stroke="#0F559A" strokeWidth="2" />
-            <text x="12" y="16" textAnchor="middle" fill="#0F559A" fontSize="14" fontWeight="bold">i</text>
-          </svg>
+          <img src="/icons/support-24.svg" alt="" className="w-6 h-6" />
           <span
-            className="font-tempo text-primary-500 uppercase"
-            style={{ fontSize: 14, letterSpacing: '0.5px' }}
+            className="font-tempo uppercase"
+            style={{ fontSize: 22, lineHeight: 1.1, color: '#09335C' }}
           >
             How it works
           </span>
@@ -165,8 +163,8 @@ export default function EntitlementSplash() {
 
         {/* Heading */}
         <h2
-          className="font-tempo text-text uppercase text-center mb-16"
-          style={{ fontSize: 64, lineHeight: 1.1 }}
+          className="font-tempo uppercase text-center mb-16"
+          style={{ fontSize: 96, lineHeight: 1.1, color: '#09335C' }}
         >
           Three easy steps
         </h2>
@@ -196,14 +194,15 @@ export default function EntitlementSplash() {
       </section>
 
       {/* ── Video Section ────────────────────────────────── */}
-      <section className="pb-20 pt-16 px-6" style={{ backgroundColor: '#E7EDF5' }}>
+      <section className="pb-20 pt-16 px-6" style={{ backgroundColor: '#C2DAF1' }}>
         <div className="max-w-[622px] mx-auto">
           {/* Video thumbnail */}
-          <div className="relative rounded-lg overflow-hidden mb-4 cursor-pointer group">
+          <div className="relative rounded-[16px] border-4 border-white overflow-hidden mb-4 cursor-pointer group aspect-[622/350]">
             <img
               src="/images/video-thumbnail.png"
               alt="Watch photobook creation"
-              className="w-full aspect-video object-cover"
+              className="absolute object-cover"
+              style={{ top: '50%', left: '50%', width: '130%', height: '130%', transform: 'translate(-50%, -50%)' }}
             />
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
               <img src="/images/hero/play-icon.svg" alt="Play" className="w-16 h-16 drop-shadow-lg" />
