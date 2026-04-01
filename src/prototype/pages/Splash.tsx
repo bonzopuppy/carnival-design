@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom'
 import { usePrototype } from '../PrototypeContext'
+import EntitlementSplash from './EntitlementSplash'
 
 export default function Splash() {
-  const { entryPoint } = usePrototype()
+  const { entryPoint, entitlement } = usePrototype()
+
+  if (entitlement !== 'none') {
+    return <EntitlementSplash />
+  }
 
   const headlines: Record<string, { heading: string; sub: string; cta: string }> = {
     direct: {
