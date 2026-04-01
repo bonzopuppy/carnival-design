@@ -82,7 +82,7 @@ export default function ProductDetail() {
           Edit Design
         </h1>
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/prototype/marketplace')}
           className="absolute right-[26px] flex items-center gap-1.5"
         >
           <img src="/icons/x-black.svg" alt="" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(89%) saturate(487%) hue-rotate(176deg) brightness(93%) contrast(92%)' }} />

@@ -4,10 +4,10 @@ import { getProductById } from '../data/products'
 
 // Product shape outlines for the dashed canvas (width x height ratios)
 const productShapes: Record<string, { w: number; h: number; label: string }> = {
-  'leather-luggage-tag': { w: 280, h: 400, label: 'Luggage Tag' },
-  'leather-passport-holder': { w: 300, h: 380, label: 'Passport Holder' },
-  'engraved-toiletry-bag': { w: 380, h: 260, label: 'Toiletry Bag' },
-  'soft-leather-journal': { w: 300, h: 380, label: 'Journal' },
+  'leather-luggage-tag': { w: 260, h: 400, label: 'Luggage Tag' },
+  'leather-passport-holder': { w: 320, h: 340, label: 'Passport Holder' },
+  'engraved-toiletry-bag': { w: 400, h: 240, label: 'Toiletry Bag' },
+  'soft-leather-journal': { w: 280, h: 360, label: 'Journal' },
   'softstyle-tshirt': { w: 340, h: 380, label: 'T-Shirt' },
   'wall-calendar': { w: 320, h: 380, label: 'Calendar' },
   'personalized-mug': { w: 380, h: 280, label: 'Mug' },
@@ -52,7 +52,7 @@ export default function Editor() {
           Edit Design
         </h1>
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/prototype/marketplace')}
           className="absolute right-[26px] flex items-center gap-1.5"
         >
           <img src="/icons/x-black.svg" alt="" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(89%) saturate(487%) hue-rotate(176deg) brightness(93%) contrast(92%)' }} />

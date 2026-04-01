@@ -248,7 +248,7 @@ function GenericHero() {
       heroImage: '/images/hero-precruise.jpg',
     },
     'pre-cruise': {
-      heading: 'Get Ready for Your Cruise',
+      heading: 'Gear Up for Your Cruise',
       sub: 'Discover travel essentials and custom keepsakes, ready before you board.',
       cta: '/prototype/marketplace',
       ctaLabel: 'Shop Now',
@@ -275,6 +275,40 @@ function GenericHero() {
           {sub}
         </p>
       </div>
+
+      {/* Product preview tiles — pre-cruise only, 2x2 grid */}
+      {journeyState === 'pre-cruise' && (
+        <div className="absolute grid grid-cols-2 gap-3" style={{ left: '54%', top: 205, width: 500 }}>
+          {[
+            { img: '/images/products/luggage-tag.png', name: 'Luggage Tags', tagline: 'personalized for every journey', id: 'leather-luggage-tag', imgSize: 100 },
+            { img: '/images/products/passport-holder.png', name: 'Passport Holders', tagline: 'travel documents in style', id: 'leather-passport-holder', imgSize: 150 },
+            { img: '/images/products/toiletry-bag.png', name: 'Toiletry Bags', tagline: 'engraved with your initials', id: 'engraved-toiletry-bag', imgSize: 130 },
+            { img: '/images/products/softstyle-tshirt.png', name: 'T-Shirts', tagline: 'show your cruise spirit', id: 'softstyle-tshirt', imgSize: 130 },
+          ].map(item => (
+            <Link
+              key={item.id}
+              to={`/prototype/marketplace/product/${item.id}`}
+              className="flex items-center gap-3 rounded-[12px] overflow-hidden group hover:brightness-110 transition-all"
+              style={{ backgroundColor: 'rgba(243,246,250,0.15)', height: 120 }}
+            >
+              <div
+                className="shrink-0 flex items-center justify-center h-full overflow-hidden"
+                style={{ width: 120, backgroundColor: 'rgba(243,246,250,0.2)' }}
+              >
+                <img src={item.img} alt={item.name} className="object-contain" style={{ maxWidth: item.imgSize, maxHeight: item.imgSize }} />
+              </div>
+              <div className="pr-3">
+                <p style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 12, lineHeight: 1.2, color: '#FFFFFF', marginBottom: 6 }}>
+                  {item.name}
+                </p>
+                <p style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 11, lineHeight: 1.3, color: 'rgba(243,246,250,0.8)' }}>
+                  {item.tagline.charAt(0).toUpperCase() + item.tagline.slice(1)}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
 
       <div className="absolute flex items-center" style={{ left: '54%', top: 500 }}>
         <Link
