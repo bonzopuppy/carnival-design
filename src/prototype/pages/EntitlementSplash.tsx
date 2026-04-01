@@ -9,14 +9,19 @@ export default function EntitlementSplash() {
     <div>
       {/* ── Hero Section ─────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex flex-col"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(9,51,92,0.75), rgba(9,51,92,0.75)), url(/images/entitlement-hero-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
+        className="relative min-h-screen flex flex-col overflow-hidden"
+        style={{ background: '#0C447B' }}
       >
+        {/* Background image + overlay */}
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+          <img
+            src="/images/entitlement-hero-bg.png"
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center bottom' }}
+          />
+          <div className="absolute inset-0" style={{ background: 'rgba(9, 51, 92, 0.6)' }} />
+        </div>
 
         {/* Logo */}
         <div className="relative z-10 flex justify-center pt-8">
@@ -233,14 +238,19 @@ export default function EntitlementSplash() {
 
       {/* ── Bottom CTA Section ───────────────────────────── */}
       <section
-        className="relative py-40 px-6"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(9,51,92,0.75), rgba(9,51,92,0.75)), url(/images/entitlement-cta-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
+        className="relative py-40 px-6 overflow-hidden"
+        style={{ background: '#0C447B' }}
       >
+        {/* Background image + overlay */}
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+          <img
+            src="/images/entitlement-cta-bg.png"
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '30% 70%' }}
+          />
+          <div className="absolute inset-0" style={{ background: 'rgba(9, 51, 92, 0.75)' }} />
+        </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-[763px] mx-auto text-center">

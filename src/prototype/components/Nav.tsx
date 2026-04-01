@@ -28,10 +28,8 @@ function NavDrawerOverlay({ open, onClose }: { open: boolean; onClose: () => voi
 
   return (
     <div className="fixed inset-0 z-50" onClick={onClose}>
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-modal-backdrop/80" />
 
-      {/* Drawer — design system NavDrawer pattern */}
       <div className="absolute left-0 top-0 h-full w-[300px] bg-white shadow-lg" onClick={e => e.stopPropagation()}>
         {/* Header */}
         <div className="flex items-center px-5 h-16">
@@ -42,7 +40,7 @@ function NavDrawerOverlay({ open, onClose }: { open: boolean; onClose: () => voi
 
         {/* Logo */}
         <div className="px-5 mb-8">
-          <img src="/icons/carnival-logo-small.svg" alt="Carnival Memories" className="h-8 w-auto" />
+          <img src="/icons/carnival-logo-small.svg" alt="Carnival Memories" style={{ maxHeight: 31 }} className="w-auto" />
         </div>
 
         {/* Nav items */}
@@ -87,46 +85,71 @@ export default function Nav() {
     <div className="shrink-0">
       <NavDrawerOverlay open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
-      {/* Main Top Nav */}
+      {/* Main Top Nav — 110px at 1440px+, 64px below */}
       <nav className="bg-white h-16 xl:h-[110px]">
         <div
-          className="h-full px-6"
-          style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}
+          className="grid h-full px-6"
+          style={{ gridTemplateColumns: '1fr auto 1fr' }}
         >
-          {/* Left — hamburger with border */}
+          {/* Left — hamburger */}
           <div className="flex items-center">
+            {/* Desktop (xl+): bordered button */}
             <button
               onClick={() => setDrawerOpen(true)}
-              className="flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm"
+              className="hidden xl:flex items-center justify-center w-11 h-11 border border-primary-400 rounded-sm"
             >
-              <img src="/icons/hamburger-menu.svg" alt="Menu" className="w-6 h-6" style={{ filter: iconFilter }} />
+              <img src="/icons/hamburger-menu.svg" alt="Menu" className="w-5 h-5" />
+            </button>
+            {/* Mobile/tablet: no border */}
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="xl:hidden p-2"
+            >
+              <img src="/icons/hamburger-menu.svg" alt="Menu" className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Center — logo (rendered ONCE) */}
+          {/* Center — logo */}
           <div className="flex items-center justify-center">
             <Link to="/prototype/home">
               <img
-                src="/logo-black.svg"
+                src="/icons/carnival-logo-small.svg"
                 alt="Carnival Memories"
-                className="max-h-[31px] xl:max-h-[50px] w-auto"
+                className="w-auto max-h-[31px] xl:max-h-[50px]"
               />
             </Link>
           </div>
 
           {/* Right — cart + account */}
           <div className="flex items-center justify-end gap-2">
-            <BorderBtn to="/prototype/order-history" title="Account">
-              <img src="/icons/account.svg" alt="Account" className="w-5 h-5" style={{ filter: iconFilter }} />
-            </BorderBtn>
-            <BorderBtn to="/prototype/cart" title="Cart" className="relative">
-              <img src="/icons/cart.svg" alt="Cart" className="w-5 h-5" style={{ filter: iconFilter }} />
-              {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-secondary-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </BorderBtn>
+            {/* Desktop (xl+): bordered buttons */}
+            <div className="hidden xl:flex items-center gap-2">
+              <BorderBtn to="/prototype/order-history" title="Account">
+                <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
+              </BorderBtn>
+              <BorderBtn to="/prototype/cart" title="Cart" className="relative">
+                <img src="/icons/cart.svg" alt="Cart" className="w-6 h-6" />
+                {itemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-secondary-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {itemCount}
+                  </span>
+                )}
+              </BorderBtn>
+            </div>
+            {/* Mobile/tablet: no borders */}
+            <div className="xl:hidden flex items-center gap-1">
+              <Link to="/prototype/order-history" className="p-2">
+                <img src="/icons/account.svg" alt="Account" className="w-6 h-6" />
+              </Link>
+              <Link to="/prototype/cart" className="p-2 relative">
+                <img src="/icons/cart.svg" alt="Cart" className="w-6 h-6" />
+                {itemCount > 0 && (
+                  <span className="absolute top-0 right-0 bg-secondary-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
@@ -138,10 +161,17 @@ export default function Nav() {
           style={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
         >
           <img src="/icons/cruise-ship.svg" alt="" className="w-5 h-5" style={{ filter: iconFilter }} />
-          <span className="text-sm font-semibold text-primary-500">Carnival Celebration (Oct 27-Nov 3, 2024)</span>
-          <Link to="/prototype/book/demo" className="font-tempo text-xs text-primary-500 uppercase tracking-wider underline underline-offset-2 ml-1">
+          <span className="text-sm text-primary-500">
+            Carnival Celebration<sup>&reg;</sup>
+          </span>
+          <span className="text-sm text-primary-500">
+            {journeyState === 'pre-cruise' && '(Apr 15 - Apr 22, 2026)'}
+            {journeyState === 'in-cruise' && '(Day 3 of 7)'}
+            {journeyState === 'post-cruise' && '(Oct 27 - Nov 3, 2024)'}
+          </span>
+          <button className="font-tempo text-xs text-primary-500 uppercase tracking-wider underline underline-offset-2 ml-1">
             Edit
-          </Link>
+          </button>
         </div>
       )}
     </div>
