@@ -1,36 +1,36 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 const sections = [
   {
     label: 'WELCOME',
-    items: [{ name: 'Intro', path: '/intro' }],
+    items: [{ name: 'Intro', path: '/style-guide/intro' }],
   },
   {
     label: 'STYLE GUIDE',
     items: [
-      { name: 'Color Palette', path: '/colors' },
-      { name: 'Typography', path: '/typography' },
-      { name: 'Spacing & Grid', path: '/spacing' },
-      { name: 'Shadows', path: '/shadows' },
-      { name: 'Icons', path: '/icons' },
+      { name: 'Color Palette', path: '/style-guide/colors' },
+      { name: 'Typography', path: '/style-guide/typography' },
+      { name: 'Spacing & Grid', path: '/style-guide/spacing' },
+      { name: 'Shadows', path: '/style-guide/shadows' },
+      { name: 'Icons', path: '/style-guide/icons' },
     ],
   },
   {
     label: 'COMPONENTS',
     items: [
-      { name: 'Button', path: '/button' },
-      { name: 'Navbar', path: '/navbar' },
-      { name: 'Nav Drawer', path: '/nav-drawer' },
-      { name: 'Card', path: '/card' },
-      { name: 'Feature List', path: '/feature-list' },
-      { name: 'Price Tag', path: '/price-tag' },
-      { name: 'Photo Upload Zone', path: '/photo-upload-zone' },
-      { name: 'Photo Grid', path: '/photo-grid' },
-      { name: 'Product Tile', path: '/product-tile' },
-      { name: 'Badge & Tag', path: '/badge-tag' },
-      { name: 'Alert & Banner', path: '/alert-banner' },
-      { name: 'Video Card', path: '/video-card' },
-      { name: 'Split Content', path: '/split-content' },
+      { name: 'Button', path: '/style-guide/button' },
+      { name: 'Navbar', path: '/style-guide/navbar' },
+      { name: 'Nav Drawer', path: '/style-guide/nav-drawer' },
+      { name: 'Card', path: '/style-guide/card' },
+      { name: 'Feature List', path: '/style-guide/feature-list' },
+      { name: 'Price Tag', path: '/style-guide/price-tag' },
+      { name: 'Photo Upload Zone', path: '/style-guide/photo-upload-zone' },
+      { name: 'Photo Grid', path: '/style-guide/photo-grid' },
+      { name: 'Product Tile', path: '/style-guide/product-tile' },
+      { name: 'Badge & Tag', path: '/style-guide/badge-tag' },
+      { name: 'Alert & Banner', path: '/style-guide/alert-banner' },
+      { name: 'Video Card', path: '/style-guide/video-card' },
+      { name: 'Split Content', path: '/style-guide/split-content' },
     ],
   },
 ]
@@ -39,8 +39,14 @@ export default function Sidebar() {
   return (
     <aside className="w-[260px] shrink-0 h-screen bg-primary-800 flex flex-col overflow-y-auto">
       <div className="px-6 pt-6 pb-4 border-b border-white/15">
-        <img src="/logo.svg" alt="Carnival Memories" className="h-8 w-auto mb-2" />
-        <div className="text-xs text-white/60">Design System</div>
+        <Link to="/" className="inline-flex items-center gap-2 text-white/60 hover:text-white/90 transition-colors text-xs mb-3">
+          <img src="/icons/arrow-left.svg" alt="" className="w-3.5 h-3.5" style={{ filter: 'brightness(0) invert(1) opacity(0.6)' }} />
+          Back to Home
+        </Link>
+        <Link to="/">
+          <img src="/logo.svg" alt="Carnival Memories" className="h-8 w-auto mb-2" />
+        </Link>
+        <div className="text-xs text-white/60">Carnival Memories · Design System</div>
       </div>
 
       <nav className="flex-1 px-4 py-4 space-y-6">
