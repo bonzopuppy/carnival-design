@@ -2,6 +2,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { usePrototype } from '../PrototypeContext'
 import { getProductsByJourneyState, type Product } from '../data/products'
 
+// Products whose images should be contained (not cover) to avoid touching edges
+const containedProducts = new Set(['wall-calendar', 'personalized-mug', 'canvas-print', 'tshirts', 'softstyle-tshirt'])
+
 function MarketplaceCard({ product }: { product: Product }) {
   return (
     <Link
@@ -10,14 +13,18 @@ function MarketplaceCard({ product }: { product: Product }) {
       style={{ width: 287 }}
     >
       {/* Image — square, bg primary-50 */}
-      <div className="h-[287px] overflow-hidden relative shrink-0 w-full">
-        <div className="absolute inset-0 bg-primary-50" />
+      <div className="h-[287px] overflow-hidden relative shrink-0 w-full bg-primary-50 flex items-center justify-center">
         {product.image ? (
-          <img src={product.image} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={product.image}
+            alt={product.name}
+            className={containedProducts.has(product.id)
+              ? 'max-w-[80%] max-h-[80%] object-contain'
+              : 'absolute inset-0 w-full h-full object-cover'
+            }
+          />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img src="/icons/marketplace-item-placeholder.svg" alt="" className="w-16 h-16 opacity-20" />
-          </div>
+          <img src="/icons/marketplace-item-placeholder.svg" alt="" className="w-16 h-16 opacity-20" />
         )}
       </div>
 
