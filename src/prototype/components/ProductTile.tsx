@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { Product } from '../data/products'
 
-const pspProducts = new Set(['personalized-mug', 'tshirts', 'ornaments'])
+const pspProducts = new Set(['personalized-mug', 'ornaments'])
 
 export default function ProductTile({ product }: { product: Product }) {
   const dest = pspProducts.has(product.id) ? `/prototype/marketplace/select/${product.id}` : `/prototype/marketplace/product/${product.id}`

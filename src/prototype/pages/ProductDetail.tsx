@@ -15,15 +15,34 @@ const colorOptions: Record<string, { name: string; color: string }[]> = {
     { name: 'Light', color: '#C4B5A0' },
   ],
   'engraved-toiletry-bag': [
-    { name: 'Olive', color: '#6B6B4B' },
-    { name: 'Brown', color: '#8B6914' },
-    { name: 'Black', color: '#242627' },
+    { name: 'Grey', color: '#6B6B4B' },
+    { name: 'Pink', color: '#E8A0A0' },
+    { name: 'Brown', color: '#C4B5A0' },
   ],
   'soft-leather-journal': [
     { name: 'Brown', color: '#8B6914' },
-    { name: 'Tan', color: '#D2B48C' },
-    { name: 'Burgundy', color: '#800020' },
+    { name: 'Pink', color: '#E8A0A0' },
+    { name: 'Light', color: '#C4B5A0' },
   ],
+  'softstyle-tshirt': [
+    { name: 'White', color: '#FFFFFF' },
+    { name: 'Black', color: '#242627' },
+    { name: 'Light Blue', color: '#87CEEB' },
+    { name: 'Navy', color: '#3B5998' },
+    { name: 'Pink', color: '#FFB6C1' },
+    { name: 'Red', color: '#DC1225' },
+  ],
+  'personalized-mug': [
+    { name: 'White', color: '#FFFFFF' },
+    { name: 'Black', color: '#242627' },
+    { name: 'Light Blue', color: '#87CEEB' },
+    { name: 'Navy', color: '#3B5998' },
+    { name: 'Pink', color: '#FFB6C1' },
+    { name: 'Red', color: '#DC1225' },
+  ],
+  ornaments: [],
+  'wall-calendar': [],
+  'canvas-print': [],
 }
 
 export default function ProductDetail() {
@@ -42,7 +61,14 @@ export default function ProductDetail() {
     )
   }
 
-  const colors = colorOptions[product.id] || [{ name: 'Default', color: '#8B6914' }]
+  const colors = colorOptions[product.id] || []
+  const isCalendar = product.id === 'wall-calendar'
+  const isMug = product.id === 'personalized-mug'
+  const isCanvas = product.id === 'canvas-print'
+  const isTshirt = product.id === 'softstyle-tshirt'
+  const [selectedSize, setSelectedSize] = useState(1)
+  const [selectedOrientation, setSelectedOrientation] = useState(1) // 0=landscape, 1=portrait
+  const [selectedFit, setSelectedFit] = useState(1) // 0=Men, 1=Women, 2=Kids, 3=Unisex
   const subtotal = (product.price * quantity).toFixed(2)
 
   return (
@@ -59,7 +85,7 @@ export default function ProductDetail() {
           onClick={() => navigate(-1)}
           className="absolute right-[26px] flex items-center gap-1.5"
         >
-          <img src="/icons/x-black.svg" alt="" className="w-5 h-5 opacity-60" />
+          <img src="/icons/x-black.svg" alt="" className="w-5 h-5" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(89%) saturate(487%) hue-rotate(176deg) brightness(93%) contrast(92%)' }} />
           <span
             className="font-tempo text-primary-500 uppercase pb-1"
             style={{ fontSize: 18, letterSpacing: '0.72px', borderBottom: '1.5px solid #9ABDDE' }}
@@ -74,10 +100,15 @@ export default function ProductDetail() {
         <div className="flex-1 flex flex-col items-center pt-8 px-10 relative">
           {/* Main image */}
           <div
-            className="bg-primary-50 rounded-[8px] flex items-center justify-center overflow-hidden"
+            className="bg-primary-50 rounded-[8px] flex items-center justify-center overflow-hidden relative"
             style={{ width: 500, height: 500 }}
           >
-            {product.image ? (
+            {isCalendar ? (
+              <>
+                <img src="/images/calendar-modal-bg.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+                <img src="/images/calendar-modal-product.png" alt={product.name} className="relative z-10 max-h-[70%] object-contain" style={{ boxShadow: '1px 2px 4px 0px rgba(0,0,0,0.2)' }} />
+              </>
+            ) : product.image ? (
               <img src={product.image} alt={product.name} className="max-w-[120%] max-h-[120%] object-contain" />
             ) : (
               <img src="/icons/marketplace-item-placeholder.svg" alt="" className="w-24 h-24 opacity-20" />
@@ -129,7 +160,201 @@ export default function ProductDetail() {
               {product.name}
             </h2>
 
-            {/* Color picker */}
+            {/* Size selector — mugs only */}
+            {isMug && (
+            <div className="mb-6">
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: 1.3, color: '#242627' }}
+              >
+                What size?
+              </p>
+              <div className="flex gap-2">
+                {['11 oz.', '15 oz.'].map((size, i) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(i)}
+                    className="flex items-center justify-center rounded-[2px] transition-colors"
+                    style={{
+                      width: 80,
+                      height: 40,
+                      border: i === selectedSize ? '2px solid #0F559A' : '1px solid rgba(0,0,0,0.15)',
+                      fontFamily: "'HelveticaNeueRegular', sans-serif",
+                      fontSize: 14,
+                      fontWeight: i === selectedSize ? 700 : 400,
+                      color: i === selectedSize ? '#0F559A' : '#242627',
+                    }}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+            )}
+
+            {/* T-shirt: who + size */}
+            {isTshirt && (
+            <>
+            <div className="mb-6">
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: 1.3, color: '#242627' }}
+              >
+                Who is this for?
+              </p>
+              <div className="flex gap-2">
+                {['Men', 'Women', 'Kids', 'Unisex'].map((fit, i) => (
+                  <button
+                    key={fit}
+                    onClick={() => setSelectedFit(i)}
+                    className="flex items-center justify-center rounded-[2px] transition-colors"
+                    style={{
+                      width: 80,
+                      height: 40,
+                      border: i === selectedFit ? '2px solid #242627' : '1px solid rgba(0,0,0,0.15)',
+                      fontFamily: "'HelveticaNeueRegular', sans-serif",
+                      fontSize: 14,
+                      fontWeight: i === selectedFit ? 700 : 400,
+                      color: '#242627',
+                    }}
+                  >
+                    {fit}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mb-6">
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: 1.3, color: '#242627' }}
+              >
+                What size?
+              </p>
+              <div className="flex gap-2">
+                {['XS', 'S', 'M', 'L', 'XL'].map((size, i) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(i)}
+                    className="flex items-center justify-center rounded-[2px] transition-colors"
+                    style={{
+                      width: 48,
+                      height: 40,
+                      border: i === selectedSize ? '2px solid #242627' : '1px solid rgba(0,0,0,0.15)',
+                      fontFamily: "'HelveticaNeueRegular', sans-serif",
+                      fontSize: 14,
+                      fontWeight: i === selectedSize ? 700 : 400,
+                      color: '#242627',
+                    }}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+            </>
+            )}
+
+            {/* Canvas size + orientation */}
+            {isCanvas && (
+            <>
+            <div className="mb-6">
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: 1.3, color: '#242627' }}
+              >
+                What size?
+              </p>
+              <div className="flex gap-2">
+                {['8x10', '11x14', '16x20'].map((size, i) => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(i)}
+                    className="flex items-center justify-center rounded-[2px] transition-colors"
+                    style={{
+                      width: 72,
+                      height: 40,
+                      border: i === selectedSize ? '2px solid #242627' : '1px solid rgba(0,0,0,0.15)',
+                      fontFamily: "'HelveticaNeueRegular', sans-serif",
+                      fontSize: 14,
+                      fontWeight: i === selectedSize ? 700 : 400,
+                      color: '#242627',
+                    }}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mb-6">
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: 1.3, color: '#242627' }}
+              >
+                Orientation
+              </p>
+              <div className="flex gap-2">
+                {['Landscape', 'Portrait'].map((orient, i) => (
+                  <button
+                    key={orient}
+                    onClick={() => setSelectedOrientation(i)}
+                    className="flex items-center justify-center gap-2 rounded-[2px] transition-colors"
+                    style={{
+                      width: 130,
+                      height: 40,
+                      border: i === selectedOrientation ? '2px solid #242627' : '1px solid rgba(0,0,0,0.15)',
+                      fontFamily: "'HelveticaNeueRegular', sans-serif",
+                      fontSize: 14,
+                      fontWeight: i === selectedOrientation ? 700 : 400,
+                      color: '#242627',
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      {i === 0 ? (
+                        <rect x="1" y="3" width="14" height="10" rx="1" stroke="#242627" strokeWidth="1.5" fill="none"/>
+                      ) : (
+                        <rect x="3" y="1" width="10" height="14" rx="1" stroke="#242627" strokeWidth="1.5" fill="none"/>
+                      )}
+                    </svg>
+                    {orient}
+                  </button>
+                ))}
+              </div>
+            </div>
+            </>
+            )}
+
+            {/* Start date — calendar only */}
+            {isCalendar && (
+            <div className="mb-6">
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 16, lineHeight: 1.3, color: '#242627' }}
+              >
+                Choose your start date
+              </p>
+              <div className="relative inline-flex items-center border border-border-subtle rounded-[2px]" style={{ width: 220, height: 36 }}>
+                <span className="pl-4 text-sm" style={{ color: '#737373', fontFamily: "'HelveticaNeueRegular', sans-serif" }}>Month / Year</span>
+                <div className="absolute flex items-center justify-center" style={{ right: 0, top: 8, bottom: 8, width: 33 }}>
+                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 1, backgroundColor: '#c4c4c4' }} />
+                  <svg width="8" height="4" viewBox="0 0 8 5" fill="none" className="ml-1">
+                    <path d="M1 1L4 4L7 1" stroke="#242627" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  </svg>
+                </div>
+                <select className="absolute inset-0 opacity-0 cursor-pointer">
+                  <option>Month / Year</option>
+                  <option>January 2026</option>
+                  <option>February 2026</option>
+                  <option>March 2026</option>
+                  <option>April 2026</option>
+                  <option>May 2026</option>
+                  <option>June 2026</option>
+                </select>
+              </div>
+            </div>
+            )}
+
+            {/* Color picker — hidden if no colors */}
+            {colors.length > 0 && (
             <div className="mb-6">
               <p
                 className="mb-4"
@@ -147,7 +372,7 @@ export default function ProductDetail() {
                   >
                     <div
                       className={`w-10 h-10 rounded-full ${i === selectedColor ? 'ring-2 ring-primary-400 ring-offset-2' : ''}`}
-                      style={{ backgroundColor: c.color, border: '1px solid rgba(0,0,0,0.1)' }}
+                      style={{ backgroundColor: c.color, border: c.color === '#FFFFFF' ? '2px solid #242627' : '1px solid rgba(0,0,0,0.1)' }}
                     />
                     <span style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 12, fontWeight: 500, color: '#737373', lineHeight: '18px' }}>
                       {c.name}
@@ -156,6 +381,7 @@ export default function ProductDetail() {
                 ))}
               </div>
             </div>
+            )}
 
             {/* Quantity */}
             <div className="mb-6">
@@ -165,24 +391,28 @@ export default function ProductDetail() {
               >
                 Quantity
               </p>
-              {/* Custom dropdown matching Figma */}
-              <div className="relative inline-flex items-center border border-border-subtle rounded-[2px]" style={{ width: 80, height: 36 }}>
-                <span className="pl-4 text-sm" style={{ color: '#242627', fontFamily: "'HelveticaNeueRegular', sans-serif" }}>{quantity}</span>
-                <div className="absolute flex items-center justify-center" style={{ right: 0, top: 8, bottom: 8, width: 33 }}>
-                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 1, backgroundColor: '#c4c4c4' }} />
-                  <svg width="8" height="4" viewBox="0 0 8 5" fill="none" className="ml-1">
-                    <path d="M1 1L4 4L7 1" stroke="#242627" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                  </svg>
-                </div>
-                <select
-                  value={quantity}
-                  onChange={e => setQuantity(Number(e.target.value))}
-                  className="absolute inset-0 opacity-0 cursor-pointer"
+              {/* Minus / number / plus stepper */}
+              <div className="inline-flex items-center border border-border-subtle rounded-[2px]" style={{ height: 40 }}>
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="flex items-center justify-center hover:bg-primary-50 transition-colors"
+                  style={{ width: 40, height: 40, borderRight: '1px solid rgba(0,0,0,0.15)' }}
                 >
-                  {[1, 2, 3, 4, 5].map(n => (
-                    <option key={n} value={n}>{n}</option>
-                  ))}
-                </select>
+                  <svg width="12" height="2" viewBox="0 0 12 2" fill="none"><path d="M0 1H12" stroke="#242627" strokeWidth="1.5"/></svg>
+                </button>
+                <span
+                  className="flex items-center justify-center"
+                  style={{ width: 40, height: 40, fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 14, color: '#242627' }}
+                >
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity(Math.min(10, quantity + 1))}
+                  className="flex items-center justify-center hover:bg-primary-50 transition-colors"
+                  style={{ width: 40, height: 40, borderLeft: '1px solid rgba(0,0,0,0.15)' }}
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 0V12M0 6H12" stroke="#242627" strokeWidth="1.5"/></svg>
+                </button>
               </div>
             </div>
           </div>

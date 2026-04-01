@@ -3,10 +3,10 @@ import { usePrototype } from '../PrototypeContext'
 import { getProductsByJourneyState, type Product } from '../data/products'
 
 // Products whose images should be contained (not cover) to avoid touching edges
-const containedProducts = new Set(['wall-calendar', 'personalized-mug', 'canvas-print', 'tshirts', 'softstyle-tshirt'])
+const containedProducts = new Set(['wall-calendar', 'personalized-mug', 'canvas-print', 'softstyle-tshirt'])
 
 // Products that go to PSP (design selection) instead of straight to PDP
-const pspProducts = new Set(['personalized-mug', 'tshirts', 'ornaments'])
+const pspProducts = new Set(['personalized-mug', 'ornaments'])
 
 function MarketplaceCard({ product }: { product: Product }) {
   return (
@@ -47,6 +47,7 @@ function MarketplaceCard({ product }: { product: Product }) {
           </p>
           {/* Description — Helvetica Neue Regular 14px, black/70, fixed 2-line height */}
           <p
+            className="line-clamp-2"
             style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 14, lineHeight: 1.3, color: 'rgba(0,0,0,0.7)', maxWidth: 271, minHeight: 36, marginBottom: 4 }}
           >
             {product.description}

@@ -83,7 +83,7 @@ function EntitlementBanner() {
 
 /* ── Product Card (matches Figma: 253px wide, image + name + price + secondary button) ── */
 
-const pspProducts = new Set(['personalized-mug', 'tshirts', 'ornaments'])
+const pspProducts = new Set(['personalized-mug', 'ornaments'])
 
 function HomepageProductCard({ product }: { product: Product }) {
   const dest = pspProducts.has(product.id) ? `/prototype/marketplace/select/${product.id}` : `/prototype/marketplace/product/${product.id}`
