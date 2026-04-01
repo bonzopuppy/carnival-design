@@ -161,13 +161,13 @@ export const products: Product[] = [
 ]
 
 export function getProductsByJourneyState(state: string): Product[] {
-  if (state === 'pre-cruise') {
+  if (state === 'pre-cruise' || state === 'in-cruise') {
     return products.filter(p => p.availability.includes('pre-cruise'))
   }
   if (state === 'post-cruise') {
     return products // post-cruise sees everything
   }
-  return [] // in-cruise and none return empty
+  return [] // none returns empty
 }
 
 export function getProductById(id: string): Product | undefined {

@@ -195,13 +195,6 @@ function GenericHero() {
       ctaLabel: 'Shop Now',
       heroImage: '/images/hero-precruise.jpg',
     },
-    'in-cruise': {
-      heading: 'Make the Most of Your Voyage',
-      sub: 'Explore in-cruise services and start capturing memories.',
-      cta: '/prototype/marketplace',
-      ctaLabel: 'Explore Services',
-      heroImage: '/images/hero-precruise.jpg',
-    },
   }
 
   const content = heroContent[journeyState]
@@ -244,12 +237,13 @@ export default function Homepage() {
   const { journeyState } = usePrototype()
   const products = getProductsByJourneyState(journeyState)
   const isPostCruise = journeyState === 'post-cruise'
+  const showPhotobookHero = journeyState === 'post-cruise' || journeyState === 'in-cruise'
 
   // Section heading by journey state
   const sectionHeading: Record<string, string> = {
     none: 'Start with Travel Must-Haves',
     'pre-cruise': 'Start with Travel Must-Haves',
-    'in-cruise': 'In-Cruise Services',
+    'in-cruise': 'Make the Most of Every Moment',
     'post-cruise': 'Bring your Cruise memories Home',
   }
 
@@ -264,7 +258,7 @@ export default function Homepage() {
 
       {/* Hero Section — 1360px max, 40px side padding */}
       <div className="max-w-[1360px] mx-auto px-10">
-        {isPostCruise ? <PostCruiseHero /> : <GenericHero />}
+        {showPhotobookHero ? <PostCruiseHero /> : <GenericHero />}
       </div>
 
       {/* Entitlement Banner */}
@@ -303,17 +297,6 @@ export default function Homepage() {
         </div>
       )}
 
-      {/* Empty state for in-cruise */}
-      {products.length === 0 && journeyState !== 'none' && (
-        <div className="max-w-[1360px] mx-auto px-10 pt-12 pb-16 text-center">
-          <h2 className="font-tempo text-text uppercase mb-4" style={{ fontSize: 36, lineHeight: 1.2 }}>
-            {sectionHeading[journeyState]}
-          </h2>
-          <p className="text-sm text-text-secondary max-w-md mx-auto">
-            In-cruise marketplace products are being curated. Check back soon for exclusive onboard offerings.
-          </p>
-        </div>
-      )}
 
     </div>
   )

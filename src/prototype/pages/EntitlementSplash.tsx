@@ -8,19 +8,15 @@ export default function EntitlementSplash() {
   return (
     <div>
       {/* ── Hero Section ─────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col">
-        {/* Background image + dark blue overlay */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <img
-            src="/images/entitlement-hero-bg.jpg"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: 'rgba(9,51,92,0.75)' }}
-          />
-        </div>
+      <section
+        className="relative min-h-screen flex flex-col"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(9,51,92,0.75), rgba(9,51,92,0.75)), url(/images/entitlement-hero-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
 
         {/* Logo */}
         <div className="relative z-10 flex justify-center pt-8">
@@ -236,19 +232,15 @@ export default function EntitlementSplash() {
       </section>
 
       {/* ── Bottom CTA Section ───────────────────────────── */}
-      <section className="relative py-40 px-6">
-        {/* Background image + dark blue overlay */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <img
-            src="/images/entitlement-cta-bg.jpg"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: 'rgba(9,51,92,0.75)' }}
-          />
-        </div>
+      <section
+        className="relative py-40 px-6"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(9,51,92,0.75), rgba(9,51,92,0.75)), url(/images/entitlement-cta-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
 
         {/* Content */}
         <div className="relative z-10 max-w-[763px] mx-auto text-center">

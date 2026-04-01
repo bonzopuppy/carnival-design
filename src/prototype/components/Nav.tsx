@@ -138,12 +138,7 @@ export default function Nav() {
           style={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
         >
           <img src="/icons/cruise-ship.svg" alt="" className="w-5 h-5" style={{ filter: iconFilter }} />
-          <span className="text-sm font-semibold text-primary-500">Carnival Celebration</span>
-          <span className="text-sm text-primary-500">
-            {journeyState === 'pre-cruise' && '· Apr 15–22, 2026'}
-            {journeyState === 'in-cruise' && '· Day 3 of 7'}
-            {journeyState === 'post-cruise' && '· Mar 10–17, 2026'}
-          </span>
+          <span className="text-sm font-semibold text-primary-500">Carnival Celebration (Oct 27-Nov 3, 2024)</span>
           <Link to="/prototype/book/demo" className="font-tempo text-xs text-primary-500 uppercase tracking-wider underline underline-offset-2 ml-1">
             Edit
           </Link>
