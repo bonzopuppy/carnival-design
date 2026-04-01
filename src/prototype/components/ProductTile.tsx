@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 import type { Product } from '../data/products'
 
+const pspProducts = new Set(['personalized-mug', 'tshirts', 'ornaments'])
+
 export default function ProductTile({ product }: { product: Product }) {
+  const dest = pspProducts.has(product.id) ? `/prototype/marketplace/select/${product.id}` : `/prototype/marketplace/product/${product.id}`
   return (
     <Link
-      to={`/prototype/marketplace/select/${product.id}`}
+      to={dest}
       className="bg-card flex flex-col group"
     >
       {/* Image */}

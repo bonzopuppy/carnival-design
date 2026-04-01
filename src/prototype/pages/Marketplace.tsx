@@ -5,10 +5,13 @@ import { getProductsByJourneyState, type Product } from '../data/products'
 // Products whose images should be contained (not cover) to avoid touching edges
 const containedProducts = new Set(['wall-calendar', 'personalized-mug', 'canvas-print', 'tshirts', 'softstyle-tshirt'])
 
+// Products that go to PSP (design selection) instead of straight to PDP
+const pspProducts = new Set(['personalized-mug', 'tshirts', 'ornaments'])
+
 function MarketplaceCard({ product }: { product: Product }) {
   return (
     <Link
-      to={`/prototype/marketplace/select/${product.id}`}
+      to={pspProducts.has(product.id) ? `/prototype/marketplace/select/${product.id}` : `/prototype/marketplace/product/${product.id}`}
       className="flex flex-col gap-[20px] items-start group"
       style={{ width: 287 }}
     >

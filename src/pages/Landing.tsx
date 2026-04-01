@@ -37,7 +37,7 @@ const useCaseFlows = [
   {
     id: 'UC7',
     name: 'Pre-Cruise',
-    description: 'Set Journey to Pre-Cruise. Splash → Homepage → Marketplace → PSP → PDP → Editor.',
+    description: 'Set Journey to Pre-Cruise. Splash → Homepage → Marketplace → PDP → Editor.',
   },
   {
     id: 'UC8',
@@ -76,7 +76,7 @@ export default function Landing() {
             to="/style-guide/intro"
             className="inline-flex items-center justify-center h-[36px] px-4 bg-secondary-500 text-white text-xs font-bold rounded-[2px] hover:bg-secondary-600 transition-colors"
           >
-            Style Guide
+            Design System
           </Link>
         </div>
       </header>

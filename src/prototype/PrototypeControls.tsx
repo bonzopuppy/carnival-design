@@ -41,7 +41,6 @@ const flows: Record<string, FlowStep[]> = {
     { label: 'Splash', path: '/prototype/home' },
     { label: 'Homepage', path: '/prototype/book/demo' },
     { label: 'Marketplace', path: '/prototype/marketplace' },
-    { label: 'Product Selection', path: '/prototype/marketplace/select/leather-luggage-tag' },
     { label: 'PDP', path: '/prototype/marketplace/product/leather-luggage-tag' },
     { label: 'Editor', path: '/prototype/editor/leather-luggage-tag' },
   ],
@@ -66,7 +65,14 @@ function FlowNav() {
   const navigate = useNavigate()
   const flow = flows[journeyState] || flows.none
 
-  const currentIndex = flow.findIndex(step => location.pathname === step.path)
+  // Match by exact path or by route pattern (e.g. any /marketplace/select/* matches the PSP step)
+  const currentIndex = flow.findIndex(step => {
+    if (location.pathname === step.path) return true
+    // Pattern match: strip the last segment and compare prefixes
+    const stepBase = step.path.replace(/\/[^/]+$/, '')
+    const locBase = location.pathname.replace(/\/[^/]+$/, '')
+    return stepBase === locBase && stepBase !== '/prototype'
+  })
   const hasPrev = currentIndex > 0
   const hasNext = currentIndex < flow.length - 1 && currentIndex >= 0
 
