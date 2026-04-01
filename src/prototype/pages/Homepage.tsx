@@ -25,7 +25,7 @@ function EntitlementBanner() {
 
       <div className="flex flex-col sm:flex-row gap-4">
         {showBook && (
-          <Link to="/prototype/entitlement/book" className="flex-1 bg-card rounded-lg flex flex-col border border-border hover:shadow-md transition-shadow overflow-hidden">
+          <Link to="/prototype/book-selection" className="flex-1 bg-card rounded-lg flex flex-col border border-border hover:shadow-md transition-shadow overflow-hidden">
             <div className="px-6 pt-6">
               <div className="h-32 bg-primary-50 rounded-lg flex items-center justify-center mb-3">
                 <div className="w-16 h-24 bg-white rounded shadow-md flex items-center justify-center">
@@ -222,7 +222,7 @@ function PhotobookHero({ freeBook = false }: { freeBook?: boolean }) {
 
       <div className="absolute flex items-center" style={{ left: 736, top: 500 }}>
         <Link
-          to="/prototype/entitlement/book"
+          to="/prototype/book-selection"
           className="inline-flex items-center justify-center gap-[12px] bg-secondary-500 text-primary-50 font-tempo uppercase rounded-[2px] px-[20px] py-[12px] hover:bg-secondary-600 transition-colors whitespace-nowrap"
           style={{ fontSize: 16, lineHeight: 1.2, letterSpacing: '0.64px' }}
         >
@@ -243,7 +243,7 @@ function GenericHero() {
     none: {
       heading: 'Create Your Photo Book',
       sub: 'Turn your cruise photos into a beautiful keepsake you\'ll treasure forever.',
-      cta: '/prototype/entitlement/book',
+      cta: '/prototype/book-selection',
       ctaLabel: 'Start Your Book',
       heroImage: '/images/hero-precruise.jpg',
     },

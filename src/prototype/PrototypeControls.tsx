@@ -47,11 +47,15 @@ const flows: Record<string, FlowStep[]> = {
   'in-cruise': [
     { label: 'Splash', path: '/prototype/home' },
     { label: 'Homepage', path: '/prototype/book/demo' },
+    { label: 'Book Selection', path: '/prototype/book-selection' },
     { label: 'Marketplace', path: '/prototype/marketplace' },
+    { label: 'PDP', path: '/prototype/marketplace/product/leather-luggage-tag' },
+    { label: 'Editor', path: '/prototype/editor/leather-luggage-tag' },
   ],
   'post-cruise': [
     { label: 'Splash', path: '/prototype/home' },
     { label: 'Homepage', path: '/prototype/book/demo' },
+    { label: 'Book Selection', path: '/prototype/book-selection' },
     { label: 'Marketplace', path: '/prototype/marketplace' },
     { label: 'Product Selection', path: '/prototype/marketplace/select/personalized-mug' },
     { label: 'PDP', path: '/prototype/marketplace/product/personalized-mug' },

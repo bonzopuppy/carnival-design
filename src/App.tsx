@@ -40,6 +40,7 @@ import Checkout from './prototype/pages/Checkout'
 import Confirmation from './prototype/pages/Confirmation'
 import OrderHistory from './prototype/pages/OrderHistory'
 import EntitlementStub from './prototype/pages/EntitlementStub'
+import BookSelection from './prototype/pages/BookSelection'
 
 function StyleGuideLayout() {
   return (
@@ -103,6 +104,7 @@ export default function App() {
         <Route path="confirmation" element={<Confirmation />} />
         <Route path="order-history" element={<OrderHistory />} />
         <Route path="entitlement/:type" element={<EntitlementStub />} />
+        <Route path="book-selection" element={<BookSelection />} />
         <Route index element={<Navigate to="home" replace />} />
       </Route>
     </Routes>

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { usePrototype } from '../PrototypeContext'
 
 function CheckItem({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,8 @@ function CheckItem({ children }: { children: React.ReactNode }) {
 
 export default function BookSelection() {
   const navigate = useNavigate()
+  const { entitlement } = usePrototype()
+  const isUpgrade = entitlement === 'compact-book' || entitlement === 'both'
 
   return (
     <div className="bg-white">
@@ -28,7 +31,7 @@ export default function BookSelection() {
             <img
               src="/icons/arrow-left.svg"
               alt=""
-              className="w-5 h-5"
+              className="w-3.5 h-3.5"
               style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(89%) saturate(487%) hue-rotate(176deg) brightness(93%) contrast(92%)' }}
             />
             <span
@@ -40,28 +43,32 @@ export default function BookSelection() {
           </button>
 
           <h1 className="font-tempo text-text uppercase text-center" style={{ fontSize: 28, lineHeight: 1.2 }}>
-            The Best Moments Deserve More Space
+            {isUpgrade ? 'The Best Moments Deserve More Space' : 'Create Your Book'}
           </h1>
-          <p
-            className="text-center mt-3 mx-auto"
-            style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 15, lineHeight: 1.4, color: 'rgba(0,0,0,0.7)', maxWidth: 520 }}
-          >
-            Want bigger pages to showcase your best shots?<br />Upgrade to a 10x10 standard or premium book.
-          </p>
+          {isUpgrade && (
+            <p
+              className="text-center mt-3 mx-auto"
+              style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 15, lineHeight: 1.4, color: 'rgba(0,0,0,0.7)', maxWidth: 520 }}
+            >
+              Want bigger pages to showcase your best shots?<br />Upgrade to a 10x10 standard or premium book.
+            </p>
+          )}
         </div>
 
         {/* Book cards — Standard + Premium */}
         <div className="flex justify-center relative" style={{ gap: 26 }}>
-          {/* Premium badge — starburst */}
-          <div
-            className="absolute z-10 flex items-center justify-center text-center"
-            style={{ right: 25, top: -30, width: 117, height: 123 }}
-          >
-            <img src="/images/badge-starburst.svg" alt="" className="absolute inset-0 w-full h-full" style={{ transform: 'rotate(6deg)' }} />
-            <span className="relative px-1" style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 12, lineHeight: 1.2, color: 'white', maxWidth: 113 }}>
-              Choose for extra pages, bigger layouts, and Carnival&#8209;branded images
-            </span>
-          </div>
+          {/* Premium badge — starburst (upgrade flow only) */}
+          {isUpgrade && (
+            <div
+              className="absolute z-10 flex items-center justify-center text-center"
+              style={{ right: 25, top: -30, width: 117, height: 123 }}
+            >
+              <img src="/images/badge-starburst.svg" alt="" className="absolute inset-0 w-full h-full" style={{ transform: 'rotate(6deg)' }} />
+              <span className="relative px-1" style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontWeight: 700, fontSize: 12, lineHeight: 1.2, color: 'white', maxWidth: 113 }}>
+                Choose for extra pages, bigger layouts, and Carnival&#8209;branded images
+              </span>
+            </div>
+          )}
 
           {/* Standard Book */}
           <div className="bg-primary-50 flex flex-col items-center px-6 pt-6 pb-6" style={{ width: 502, minHeight: 539 }}>
@@ -140,41 +147,43 @@ export default function BookSelection() {
           </div>
         </div>
 
-        {/* Compact Book — bottom card */}
-        <div
-          className="mx-auto flex items-center mt-8 overflow-hidden"
-          style={{ maxWidth: 650, height: 163, backgroundColor: '#F3F6FA' }}
-        >
-          {/* Book image */}
-          <div className="shrink-0 overflow-hidden" style={{ width: 151, height: 163 }}>
-            <img src="/images/book-compact.png" alt="Compact book" className="w-full h-full object-cover" />
-          </div>
+        {/* Compact Book — bottom card (upgrade flow only) */}
+        {isUpgrade && (
+          <div
+            className="mx-auto flex items-center mt-8 overflow-hidden"
+            style={{ maxWidth: 650, height: 163, backgroundColor: '#F3F6FA' }}
+          >
+            {/* Book image */}
+            <div className="shrink-0 overflow-hidden" style={{ width: 151, height: 163 }}>
+              <img src="/images/book-compact.png" alt="Compact book" className="w-full h-full object-cover" />
+            </div>
 
-          {/* Info */}
-          <div className="flex-1 px-5 py-4">
-            <h4 className="font-tempo text-text uppercase mb-1" style={{ fontSize: 18, lineHeight: 1.2 }}>
-              Compact Book (6" x 6")
-            </h4>
-            <p className="mb-3" style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 16, lineHeight: 1.3, color: '#4A5565', maxWidth: 291 }}>
-              Softcover, 20 pages. Your photos only, no Carnival images included.
-            </p>
-            <button
-              className="inline-flex items-center gap-3 bg-white border border-primary-500 text-primary-500 font-tempo uppercase rounded-[2px] px-5 py-3 hover:bg-primary-50 transition-colors"
-              style={{ fontSize: 16, letterSpacing: '0.64px' }}
-            >
-              Select Compact Book
-              <svg width="13" height="13" viewBox="0 0 13.3333 13.3333" fill="none">
-                <path d="M6.66667 0L5.49167 1.175L10.1417 5.83333H0V7.5H10.1417L5.49167 12.1583L6.66667 13.3333L13.3333 6.66667L6.66667 0Z" fill="#0F559A"/>
-              </svg>
-            </button>
-          </div>
+            {/* Info */}
+            <div className="flex-1 px-5 py-4">
+              <h4 className="font-tempo text-text uppercase mb-1" style={{ fontSize: 18, lineHeight: 1.2 }}>
+                Compact Book (6" x 6")
+              </h4>
+              <p className="mb-3" style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 16, lineHeight: 1.3, color: '#4A5565', maxWidth: 291 }}>
+                Softcover, 20 pages. Your photos only, no Carnival images included.
+              </p>
+              <button
+                className="inline-flex items-center gap-3 bg-white border border-primary-500 text-primary-500 font-tempo uppercase rounded-[2px] px-5 py-3 hover:bg-primary-50 transition-colors"
+                style={{ fontSize: 16, letterSpacing: '0.64px' }}
+              >
+                Select Compact Book
+                <svg width="13" height="13" viewBox="0 0 13.3333 13.3333" fill="none">
+                  <path d="M6.66667 0L5.49167 1.175L10.1417 5.83333H0V7.5H10.1417L5.49167 12.1583L6.66667 13.3333L13.3333 6.66667L6.66667 0Z" fill="#0F559A"/>
+                </svg>
+              </button>
+            </div>
 
-          {/* Price — right aligned */}
-          <div className="shrink-0 text-right pr-6" style={{ width: 118 }}>
-            <span className="font-tempo text-primary-500 uppercase" style={{ fontSize: 28, lineHeight: 1.2 }}>Free</span>
-            <p style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 12, color: '#2C69A6', marginTop: 2 }}>Shipping not included</p>
+            {/* Price — right aligned */}
+            <div className="shrink-0 text-right pr-6" style={{ width: 118 }}>
+              <span className="font-tempo text-primary-500 uppercase" style={{ fontSize: 28, lineHeight: 1.2 }}>Free</span>
+              <p style={{ fontFamily: "'HelveticaNeueRegular', sans-serif", fontSize: 12, color: '#2C69A6', marginTop: 2 }}>Shipping not included</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
