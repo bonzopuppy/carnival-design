@@ -37,19 +37,14 @@ export default function Splash() {
 
   return (
     <div className="relative min-h-full flex flex-col">
-      {/* Background photo + blue overlay */}
+      {/* Background: solid blue + photo at 35% opacity */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 bg-[#10559a]" />
         <img
-          src="/splash-bg.jpg"
+          src="/images/splash-precruise.jpg"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'linear-gradient(90deg, rgba(15,85,154,0.5) 0%, rgba(15,85,154,0.5) 100%), linear-gradient(180deg, rgba(15,85,154,0.8) 0%, rgba(15,85,154,0) 100%)',
-          }}
+          className="absolute inset-0 w-full h-full object-cover opacity-35"
+          style={{ objectPosition: '70% 30%' }}
         />
       </div>
 

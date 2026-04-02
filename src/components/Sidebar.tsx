@@ -31,6 +31,7 @@ const sections = [
       { name: 'Alert & Banner', path: '/style-guide/alert-banner' },
       { name: 'Video Card', path: '/style-guide/video-card' },
       { name: 'Split Content', path: '/style-guide/split-content' },
+      { name: 'Hero', path: '/style-guide/hero' },
     ],
   },
 ]

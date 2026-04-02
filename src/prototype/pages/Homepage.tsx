@@ -324,6 +324,102 @@ function GenericHero() {
   )
 }
 
+/* ── Photobook Hero Short (in-cruise, post-cruise) ───── */
+
+function PhotobookHeroShort() {
+  return (
+    <div className="bg-primary-500 overflow-hidden relative rounded-l-[4px]" style={{ height: 420 }}>
+      {/* Left: light blue panel with open book */}
+      <div className="absolute left-0 top-0 h-[420px] overflow-hidden rounded-l-[4px]" style={{ width: 680, backgroundColor: '#c2daf1' }}>
+        <img
+          src="/images/hero/photobook-open.png"
+          alt="Open photo book"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ width: 484, boxShadow: '5px 5px 10px 0px rgba(0,0,0,0.25)' }}
+        />
+      </div>
+
+      {/* Right: text content */}
+      <div className="absolute flex flex-col gap-[8px] items-start" style={{ left: 728, top: 48, width: 548 }}>
+        <div className="font-tempo text-white uppercase" style={{ fontSize: 48, lineHeight: 1.2 }}>
+          <p style={{ lineHeight: 1.2, marginBottom: 0 }}>Turn your cruise photos into a beautiful keepsake</p>
+          <p style={{ lineHeight: 1.2 }}>— Automatically</p>
+        </div>
+        <p className="text-primary-50 font-semibold" style={{ fontSize: 20, lineHeight: 1.3, maxWidth: 457 }}>
+          Start your photobook and capture your Carnival cruise memories
+        </p>
+      </div>
+
+      {/* CTA button */}
+      <div className="absolute flex items-center" style={{ left: 728, bottom: 48 }}>
+        <Link
+          to="/prototype/book-selection"
+          className="inline-flex items-center justify-center gap-[12px] bg-secondary-500 text-primary-50 font-tempo uppercase rounded-[2px] px-[20px] py-[12px] hover:bg-secondary-600 transition-colors"
+          style={{ width: 225, fontSize: 16, lineHeight: 1.2, letterSpacing: '0.64px' }}
+        >
+          Start Your Photobook
+          <svg width="13" height="13" viewBox="0 0 13.3333 13.3333" fill="none"><path d="M6.66667 0L5.49167 1.175L10.1417 5.83333H0V7.5H10.1417L5.49167 12.1583L6.66667 13.3333L13.3333 6.66667L6.66667 0Z" fill="#F3F6FA"/></svg>
+        </Link>
+      </div>
+
+      {/* Video card — bottom right */}
+      <div className="absolute bg-white rounded-[4px] overflow-hidden flex" style={{ right: 24, bottom: 24, width: 258, height: 88 }}>
+        <div className="relative rounded-[2px] overflow-hidden shrink-0" style={{ width: 128, height: 72, margin: 8 }}>
+          <img src="/images/hero/video-thumbnail.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path fillRule="evenodd" clipRule="evenodd" d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32ZM25 16L11 8V24L25 16Z" fill="rgba(243,246,250,0.9)" />
+            </svg>
+          </div>
+        </div>
+        <p className="font-tempo text-primary-700 uppercase flex-1" style={{ fontSize: 16, lineHeight: 1.2, padding: 8 }}>
+          Watch your photobook create itself
+        </p>
+      </div>
+    </div>
+  )
+}
+
+/* ── Generic Hero Short (pre-cruise) ─────────────────── */
+
+function GenericHeroShort() {
+  return (
+    <div className="bg-primary-500 overflow-hidden relative rounded-[8px]" style={{ height: 420 }}>
+      {/* Left: image panel — 680px */}
+      <div className="absolute left-0 top-0 h-[600px] overflow-hidden rounded-l-[8px]" style={{ width: 680 }}>
+        <img
+          src="/images/hero-stateroom.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 100%)' }} />
+      </div>
+
+      {/* Right: text content */}
+      <div className="absolute flex flex-col gap-[8px] items-start" style={{ left: 736, top: 56, width: 548 }}>
+        <h1 className="font-tempo text-white uppercase" style={{ fontSize: 48, lineHeight: 1.2 }}>
+          Gear Up for Your Cruise
+        </h1>
+        <p className="text-primary-50 font-semibold" style={{ fontSize: 20, lineHeight: 1.3, maxWidth: 457 }}>
+          Discover travel essentials and custom keepsakes, ready before you board.
+        </p>
+      </div>
+
+      {/* CTA button */}
+      <div className="absolute flex items-center" style={{ left: 736, bottom: 56 }}>
+        <Link
+          to="/prototype/marketplace"
+          className="inline-flex items-center justify-center gap-[12px] bg-secondary-500 text-primary-50 font-tempo uppercase rounded-[2px] px-[20px] py-[12px] hover:bg-secondary-600 transition-colors"
+          style={{ width: 225, fontSize: 16, lineHeight: 1.2, letterSpacing: '0.64px' }}
+        >
+          Shop Now
+          <svg width="13" height="13" viewBox="0 0 13.3333 13.3333" fill="none"><path d="M6.66667 0L5.49167 1.175L10.1417 5.83333H0V7.5H10.1417L5.49167 12.1583L6.66667 13.3333L13.3333 6.66667L6.66667 0Z" fill="#F3F6FA"/></svg>
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 /* ── Homepage ──────────────────────────────────────────── */
 
 export default function Homepage() {
@@ -343,7 +439,7 @@ export default function Homepage() {
   const sectionHeading: Record<string, string> = {
     none: 'Start with Travel Must-Haves',
     'pre-cruise': 'Start with Travel Must-Haves',
-    'in-cruise': 'Make the Most of Every Moment',
+    'in-cruise': 'Make Your Cruise Memories Last',
     'post-cruise': 'Bring your Cruise memories Home',
   }
 
@@ -352,16 +448,11 @@ export default function Homepage() {
       {/* Calendar entitlement modal */}
       <CalendarModal open={calendarModalOpen} onClose={() => setCalendarModalOpen(false)} />
 
-      {/* Welcome title */}
-      <div className="px-10 pt-12 pb-8 text-center">
-        <h2 className="font-tempo text-secondary-500 uppercase" style={{ fontSize: 36, lineHeight: 1.2 }}>
-          Welcome to Carnival Memories
-        </h2>
-      </div>
+      <div className="pt-8" />
 
       {/* Hero Section — 1360px max, 40px side padding */}
       <div className="max-w-[1360px] mx-auto px-10">
-        {showPhotobookHero ? <PhotobookHero freeBook={hasCompactBook} /> : <GenericHero />}
+        {hasCompactBook ? <PhotobookHero freeBook /> : (journeyState === 'in-cruise' || journeyState === 'post-cruise') ? <PhotobookHeroShort /> : journeyState === 'pre-cruise' ? <GenericHeroShort /> : <GenericHero />}
       </div>
 
 

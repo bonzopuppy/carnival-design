@@ -26,6 +26,7 @@ import BadgeTagPage from './pages/BadgeTagPage'
 import AlertBannerPage from './pages/AlertBannerPage'
 import VideoCardPage from './pages/VideoCardPage'
 import SplitContentPage from './pages/SplitContentPage'
+import HeroPage from './pages/HeroPage'
 
 // Prototype
 import PrototypeLayout from './prototype/PrototypeLayout'
@@ -47,30 +48,35 @@ function StyleGuideLayout() {
     <div className="flex h-screen bg-bg font-body">
       <Sidebar />
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-10 py-12">
-          <Routes>
-            <Route path="intro" element={<Intro />} />
-            <Route path="colors" element={<ColorPalette />} />
-            <Route path="typography" element={<Typography />} />
-            <Route path="spacing" element={<SpacingGrid />} />
-            <Route path="shadows" element={<Shadows />} />
-            <Route path="icons" element={<IconsPage />} />
-            <Route path="button" element={<ButtonPage />} />
-            <Route path="navbar" element={<NavbarPage />} />
-            <Route path="nav-drawer" element={<NavDrawerPage />} />
-            <Route path="card" element={<CardPage />} />
-            <Route path="feature-list" element={<FeatureListPage />} />
-            <Route path="price-tag" element={<PriceTagPage />} />
-            <Route path="photo-upload-zone" element={<PhotoUploadZonePage />} />
-            <Route path="photo-grid" element={<PhotoGridPage />} />
-            <Route path="product-tile" element={<ProductTilePage />} />
-            <Route path="badge-tag" element={<BadgeTagPage />} />
-            <Route path="alert-banner" element={<AlertBannerPage />} />
-            <Route path="video-card" element={<VideoCardPage />} />
-            <Route path="split-content" element={<SplitContentPage />} />
-            <Route path="*" element={<Navigate to="intro" replace />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="hero" element={<div className="max-w-[1440px] mx-auto px-10 py-12"><HeroPage /></div>} />
+          <Route path="*" element={
+            <div className="max-w-4xl mx-auto px-10 py-12">
+              <Routes>
+                <Route path="intro" element={<Intro />} />
+                <Route path="colors" element={<ColorPalette />} />
+                <Route path="typography" element={<Typography />} />
+                <Route path="spacing" element={<SpacingGrid />} />
+                <Route path="shadows" element={<Shadows />} />
+                <Route path="icons" element={<IconsPage />} />
+                <Route path="button" element={<ButtonPage />} />
+                <Route path="navbar" element={<NavbarPage />} />
+                <Route path="nav-drawer" element={<NavDrawerPage />} />
+                <Route path="card" element={<CardPage />} />
+                <Route path="feature-list" element={<FeatureListPage />} />
+                <Route path="price-tag" element={<PriceTagPage />} />
+                <Route path="photo-upload-zone" element={<PhotoUploadZonePage />} />
+                <Route path="photo-grid" element={<PhotoGridPage />} />
+                <Route path="product-tile" element={<ProductTilePage />} />
+                <Route path="badge-tag" element={<BadgeTagPage />} />
+                <Route path="alert-banner" element={<AlertBannerPage />} />
+                <Route path="video-card" element={<VideoCardPage />} />
+                <Route path="split-content" element={<SplitContentPage />} />
+                <Route path="*" element={<Navigate to="intro" replace />} />
+              </Routes>
+            </div>
+          } />
+        </Routes>
       </main>
     </div>
   )
